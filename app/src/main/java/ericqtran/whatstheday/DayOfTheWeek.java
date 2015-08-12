@@ -4,13 +4,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class DayOfTheWeek extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        final String[] daysOfWeek = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_of_the_week);
+
+        final EditText dateBox = (EditText)findViewById(R.id.dateBox);
+        final TextView output = (TextView)findViewById(R.id.result);
+        final TextView belowInput = (TextView)findViewById(R.id.belowInputBox);
+        final Date outputDate = new Date();
+
+
+        Button calcButt = (Button)findViewById(R.id.calculateButton);
+
+        calcButt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                String inputDate = dateBox.getText().toString();
+
+                Date result = outputDate.parseDate(inputDate);
+
+                int theCalculatedResult = result.dayOfTheWeekCalc(result);
+
+                String finalResult = daysOfWeek[theCalculatedResult];
+
+                output.setText(finalResult);
+
+            }
+        });
+
     }
 
     @Override
