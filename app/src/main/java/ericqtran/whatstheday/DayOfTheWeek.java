@@ -32,8 +32,19 @@ public class DayOfTheWeek extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 String inputDate = dateBox.getText().toString();
 
+                if(inputDate.matches(""))
+                {
+                    output.setText("Please input a date");
+                    return;
+                }
+                else if(!inputDate.matches("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})"))
+                {
+                    output.setText("Please input a valid date");
+                    return;
+                }
                 Date result = outputDate.parseDate(inputDate);
 
                 int theCalculatedResult = result.dayOfTheWeekCalc(result);
